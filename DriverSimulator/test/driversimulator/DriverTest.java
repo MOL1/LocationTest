@@ -46,7 +46,7 @@ public class DriverTest {
         double random = 0.2;
         double random2 = 0.5;
         Location[] locations = null;
-        Driver instance = new Driver(name, stratLocation);
+        Driver instance = new Driver("name", 1);
         instance.chooseDirection(random, random2, locations);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
