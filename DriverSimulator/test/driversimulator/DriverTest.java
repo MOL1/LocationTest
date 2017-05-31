@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+
 
 /**
  *
@@ -45,11 +47,16 @@ public class DriverTest {
         System.out.println("chooseDirection");
         double random = 0.2;
         double random2 = 0.5;
-        Location[] locations = null;
-        Driver instance = new Driver("name", 1);
+        Location location = Mockito.mock(Location.class);
+        Driver driver = Mockito.mock(Driver.class);
+        Location[] locations = new Location[1];
+        when(driver.chooseDirection()).thenReturn();
+        
+        
+        
+        Driver instance = new Driver("name", location);
         instance.chooseDirection(random, random2, locations);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
