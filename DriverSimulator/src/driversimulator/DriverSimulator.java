@@ -85,11 +85,14 @@ class Driver {
         this.locationName = startLoc.getName();
 
     }
-
+    
+    //Change to a public location then change the rest of the code accordingly
     public void chooseDirection(double random, double random2, Location[] locations) {
         if (random < 0.5) {
             this.location = locations[this.location.Left()];
             this.locationName = this.location.getName();
+            //return locations[this.location.Left()]; //need to use this to update the location
+            //will need a setter for location
         } else {
             this.location = locations[this.location.Right()];
             this.locationName = this.location.getName();
