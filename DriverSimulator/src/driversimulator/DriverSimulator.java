@@ -22,6 +22,7 @@ public class DriverSimulator {
         String n = "";
         int seed = 0;
         boolean goodSeed = true;
+        
         Scanner reader = new Scanner(System.in);  // Reading from System.in       
         System.out.println("Please enter a seed.");
         while (goodSeed) {
@@ -57,6 +58,8 @@ public class DriverSimulator {
                 System.out.println(name + " is in " + zoom.locationName());
 
             }
+            System.out.println(name + "has gone to");
+            System.out.println("-----");
         }
 
     }
@@ -78,6 +81,7 @@ class Driver {
     String name = "";
     Location location = null;
     boolean inHastings = true;
+    int akinaVisit = 0;
 
     public Driver(String _name, Location startLoc) {
         this.location = startLoc;
@@ -88,14 +92,19 @@ class Driver {
     
     //Change to a public location then change the rest of the code accordingly
     public void chooseDirection(double random, double random2, Location[] locations) {
+        if (this.locationName == "Akina"){
+            this.akinaVisit++;
+        }
         if (random < 0.5) {
             this.location = locations[this.location.Left()];
             this.locationName = this.location.getName();
+            
             //return locations[this.location.Left()]; //need to use this to update the location
             //will need a setter for location
         } else {
             this.location = locations[this.location.Right()];
             this.locationName = this.location.getName();
+           
         }
         if (random2 > 0.9) {
             this.inHastings = false;
