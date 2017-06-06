@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 
 /**
@@ -44,47 +45,44 @@ public class DriverTest {
      */
     @Test
     public void testChooseDirection() {
-        System.out.println("chooseDirection");
-        double random = 0.2;
-        double random2 = 0.5;
-        Location location = Mockito.mock(Location.class);
-        Driver driver = Mockito.mock(Driver.class);
-        Location[] locations = new Location[1];
-        when(driver.chooseDirection()).thenReturn();
+        System.out.println("chooseDirectionTest");
+      //  double random = 0.2;
+      //  double random2 = 0.5;
+     
+        
+        Location location = Mockito.mock(Location.class);//mock Location class 
+        Location[] locations = new Location[4];
+        locations[0] = location;
+        locations[1] = location;
+        locations[2] = location;
+        locations[3] = location;
+
         
         
+        Driver driver = new Driver("1", location);//built a driver class name "1" and in mock location 
         
-        Driver instance = new Driver("name", location);
-        instance.chooseDirection(random, random2, locations);
+        when(location.getName()).thenReturn("abc");
+        when(location.Left()).thenReturn(1);
+        when(location.Right()).thenReturn(2);
+        
+        driver.chooseDirection(0.2, 0.5, locations);//run method chooseDirection using test data
+       
+        verify(location, times(1)).Left();//verify location.Left method runs once
+        
+//        System.out.println("testLocationName");
+//        verify(location, times(1)).getName();
+//        assertEquals("abc", driver.locationName());//if use driver.location method, assert stubbed data "abc" with the outcome
+//        System.out.println("inHastingsTest");
+//        verify(driver, times(1)).inHastings();
+//        assertEquals(true, driver.inHastings());
+
+    
+                                    
       
     }
+        
+   
 
-    /**
-     * Test of locationName method, of class Driver.
-     */
-    @Test
-    public void testLocationName() {
-        System.out.println("locationName");
-        Driver instance = null;
-        String expResult = "";
-        String result = instance.locationName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of inHastings method, of class Driver.
-     */
-    @Test
-    public void testInHastings() {
-        System.out.println("inHastings");
-        Driver instance = null;
-        boolean expResult = false;
-        boolean result = instance.inHastings();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
     
 }
