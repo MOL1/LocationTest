@@ -42,24 +42,45 @@ public class DriverSimulator {
 
         Location[] locations = new Location[4];
 
-        locations[0] = new Location("Mayfair", 3, 1);
-        locations[1] = new Location("Akina", 0, 2);
-        locations[2] = new Location("Stortford Lodge", 1, 3);
-        locations[3] = new Location("Mahora", 2, 0);
-
+        locations[0] = new Location("Mayfair", "Frederick Street", "Willowpark Road", 3, 1);
+        locations[1] = new Location("Akina", "Willowpark Road", "Southampton Street West", 0, 2);
+        locations[2] = new Location("Stortford Lodge", "Southampton Street West", "Pakowhai Road", 1, 3);
+        locations[3] = new Location("Mahora", "Pakowhai Road", "Frederick Street", 2, 0);
+        
         for (int i = 1; i < 6; i++) {
             String name = "Driver " + i;
 
-            Location startingPlace = locations[(int) (generator.nextDouble() * 4)];
+            Location startingPlace = locations[(int)(generator.nextDouble() * 4)];
             System.out.println(name + " has started in " + startingPlace.getName());
             Driver zoom = new Driver(name, startingPlace);
             while (zoom.inHastings() == true) {
-                zoom.chooseDirection(generator.nextDouble(), generator.nextDouble(), locations);
-                System.out.println(name + " is in " + zoom.locationName());
+                double ran1= generator.nextDouble();
+                double ran2 = generator.nextDouble();
+                System.out.print(name + " is heading from " + zoom.locationName());
+                    if (ran1 < 0.5) {
+                        System.out.print(" via " + zoom.getLocation().getLeftStreet());
+                    } 
+                    else {
+                        System.out.print(" via " + zoom.getLocation().getRightStreet());
+                    }
+                    zoom.chooseDirection(ran1, ran2, locations);
+                    System.out.println(" to " + zoom.locationName());
+                    //System.out.println(name + " is in " + zoom.locationName());
+                    }
+                System.out.println(name + " has gone to " + zoom.locationName()); System.out.println("-----");
 
-            }
-            System.out.println(name + "has gone to");
-            System.out.println("-----");
+//            Location startingPlace = locations[(int) (generator.nextDouble() * 4)];
+//            System.out.println(name + " has started in " + startingPlace.getName());
+//            Driver zoom = new Driver(name, startingPlace);
+//            while (zoom.inHastings() == true) {
+//                double ran1= generator.nextDouble();
+//                double ran2 = generator.nextDouble();
+//                zoom.chooseDirection(ran1, ran2, locations);
+//                System.out.println(name + " is in " + zoom.locationName());
+//
+//            }
+//            System.out.println(name + "has gone to");
+//            System.out.println("-----");
         }
 
     }
@@ -108,6 +129,7 @@ class Driver {
         }
         if (random2 > 0.9) {
             this.inHastings = false;
+            
             this.locationName = "Outside City";
         }
     }
@@ -119,22 +141,32 @@ class Driver {
     public boolean inHastings() {
         return this.inHastings;
     }
+    public Location getLocation(){ return this.location; }
 }
 
 class Location {
-
     String name = "";
+    String leftStreet = "";
+    String rightStreet = "";
     int pointerLeft = 0;
     int pointerRight = 0;
 
-    public Location(String _name, int left, int right) {
+    public Location(String _name, String left_name, String right_name, int left, int right) {
         this.name = _name;
+        this.leftStreet = left_name;
+        this.rightStreet = right_name;
         this.pointerLeft = left;
         this.pointerRight = right;
     }
 
     public String getName() {
         return this.name;
+    }
+    public String getLeftStreet() {
+        return this.leftStreet;
+    }
+    public String getRightStreet() {
+        return this.rightStreet;
     }
 
     public int Left() {
