@@ -67,7 +67,15 @@ public class DriverSimulator {
                     System.out.println(" to " + zoom.locationName());
                     //System.out.println(name + " is in " + zoom.locationName());
                     }
-                System.out.println(name + " has gone to " + zoom.locationName()); System.out.println("-----");
+                System.out.println(name + " meet with " + zoom.getAkinaVisit() + "times.");
+                if(zoom.getAkinaVisit()>3){
+                  System.out.println("This driver needed lots of help!");
+                }
+                if(zoom.getAkinaVisit()<1){
+                  System.out.println("That passenger missed out!");
+                }
+                System.out.println(name + " has gone to " + zoom.locationName());
+                System.out.println("-----");
 
 //            Location startingPlace = locations[(int) (generator.nextDouble() * 4)];
 //            System.out.println(name + " has started in " + startingPlace.getName());
@@ -141,7 +149,12 @@ class Driver {
     public boolean inHastings() {
         return this.inHastings;
     }
-    public Location getLocation(){ return this.location; }
+    public Location getLocation(){ 
+        return this.location;
+    }
+    public int getAkinaVisit(){
+        return this.akinaVisit;
+    }
 }
 
 class Location {
